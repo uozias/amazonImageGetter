@@ -5,24 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AmazonImageGetter"
         mc:Ignorable="d"
-        Title="AsinTo画像" Height="350" Width="525">
+        Title="AsinTo画像" Height="350" Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="331*"/>
+            <ColumnDefinition Width="211*"/>
+            <ColumnDefinition Width="451*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="0" Text="Asin欄" FontSize="12" Margin="10,11,9.333,275.667"  />
+        <TextBlock Grid.Column="0" Text="Asin欄" FontSize="12" Margin="10,11,8.333,275.667"  />
         <Button 
             Name="goButton"
             Grid.Column="0" 
             FontSize="12"
             Content="取得" Margin="188,10,10.333,280.667" />
         <TextBox  Name="asinInput"
-           Grid.Column="0"  HorizontalAlignment="Left" Height="30" Margin="10,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240"/>
+           Grid.Column="0"  HorizontalAlignment="Left" Height="30" Margin="10,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="311" />
 
-        <TextBlock Grid.Column="1" Text="結果" FontSize="12" Margin="9.667,11,-0.333,275.667" />
-        <TextBlock Grid.Column="1" Name="resultArea" Text="" FontSize="18" Margin="10.667,45,-1.333,9.667" />
+        <TextBlock Grid.Column="1" Name="resultLabel" Text="結果" FontSize="12" Margin="9.667,10,-0.667,275.667" Grid.ColumnSpan="2" />
+        <TextBox Grid.Column="1" Name="resultArea" Text="" FontSize="12" VerticalAlignment="Top" Margin="9.667,45,10.333,0" Height="30" Grid.ColumnSpan="2" />
     </Grid>
 
 </Window>

@@ -47,7 +47,13 @@ namespace AmazonImageGetter
 
         void AddToTextArea(String text)
         {
-            resultArea.Text = resultArea.Text + "\n" + text;
+            resultArea.Dispatcher.BeginInvoke(
+                new Action(() =>
+                {
+                    resultLabel.Text = "結果";
+                    resultArea.Text = resultArea.Text + "\n" + text;
+                })
+            );
         }
 
         String GetAmazonUrl(String asin)
@@ -61,8 +67,15 @@ namespace AmazonImageGetter
             var result = new ArrayList();
             var phantomJS = new PhantomJS();
             phantomJS.OutputReceived += (sender, e) => {
-                AddToTextArea(e.Data);
-                Console.WriteLine("PhantomJS error: {0}", e.Data);
+                if(e.Data != null)
+                {
+                    if (e.Data.StartsWith("result__"))
+                    {
+                        AddToTextArea(e.Data.Replace("result__", ""));
+                    }
+                    Console.WriteLine("PhantomJS output: {0}", e.Data);
+                }
+               
             };
             phantomJS.ErrorReceived += (sender, e) => {
                 Console.WriteLine("PhantomJS error: {0}", e.Data);
@@ -80,17 +93,14 @@ page.onConsoleMessage = function(msg) {
 }
 
 page.open('"+ url + @"', function(status) {
-  page.evaluate(function() {
-    var lists = document.getElementById('altImages').children[1].children;
-    for(var j = 1; j < lists.length + 1; j++){
-        lists[j].click();
-        var result = document.getElementsByClassName('itemNo' + j)[0].getElementsByTagName('img')[0].src
-        console.log(result);
-    }
+    var url= page.evaluate(function() {
+        return document.getElementsByClassName('itemNo0')[0].getElementsByTagName('img')[0].src
+    });
+    console.log('result__' + url);
     phantom.exit();
-  });
 });
 ";
+            resultLabel.Text = "取得中";
             phantomJS.RunScript(scriptString, null);
         }
     }
