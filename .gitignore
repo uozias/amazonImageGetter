@@ -1,4 +1,8 @@
 ﻿.vs
 ./AmazonImageGetter\bin\Debug
 ./AmazonImageGetter\obj\Debug
-./AmazonImageGetter\packeages
+./packeages
+/packages
+/AmazonImageGetter/obj/Debug
+/AmazonImageGetter/bin/Debug
+/.vs/AmazonImageGetterSolution/v14
